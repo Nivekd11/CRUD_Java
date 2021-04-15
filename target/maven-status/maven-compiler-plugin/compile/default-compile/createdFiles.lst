@@ -1,0 +1,7 @@
+controlador\carrera\AgregarCarrera.class
+com\mycompany\c15\Carrera.class
+controlador\carrera\MostraCarreras.class
+controlador\carrera\verCarrera.class
+controlador\carrera\ActualizarCarrera.class
+dao\CarreraDAO.class
+controlador\carrera\EliminarCarrera.class
