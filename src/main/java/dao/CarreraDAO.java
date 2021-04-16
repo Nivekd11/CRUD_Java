@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
 public class CarreraDAO {
 
@@ -21,26 +21,21 @@ public class CarreraDAO {
     private static final String SQL_UPDATE = "update Carrera set nombreCarrera=? , duracion=? where idCarrera=?";
     private static final String SQL_DELETE = "delete from Carrera where idCarrera = ?";
     private static final String SQL_READ = "select * from Carrera where idCarrera = ?";
-    private static final String SQL_READ_ALL = "select * from Carrera";
+    private static final String SQL_READ_ALL = "select idCarrera, nombreCarrera, duracion from Carrera";
 
     private Connection conexion;
 
     private void obtenerConexion() {
-        String usuario = "nivek";
+        String usuario = "root";
         String clave = "nivek";
         //Checar puerto por si hay error
          //String url="jdbc:mysql://localhost:3306/usuario";
-        String url = "jdbc:mysql://localhost:3306/usuario?serverTimezone=America/Mexico_City&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;useSSL=false";
-        String driverMysql = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/proyectobase3cm15?zeroDateTimeBehavior=CONVERT_TO_NULL";
+        String driverMysql = "com.mysql.cj.jdbc.Driver";
         try {
-            // String driverMysql="com.mysql.cj.jdbc.Driver";
             Class.forName(driverMysql);
-            try {
-                conexion = DriverManager.getConnection(url, usuario, clave);
-            } catch (SQLException ex) {
-                Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (ClassNotFoundException ex) {
+            conexion = DriverManager.getConnection(url, usuario, clave);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -105,16 +100,18 @@ public class CarreraDAO {
 
     public List readAll() throws SQLException {
         obtenerConexion();
+        System.out.println("****** hOLA");
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps=conexion.prepareStatement(SQL_READ_ALL);
-            rs=ps.executeQuery();
+            ps = conexion.prepareStatement(SQL_READ_ALL);
+            rs = ps.executeQuery();
             List resultados = obtenerResultados(rs);
-            if(resultados.size()>0){
-            return resultados;
-            }else {
-            return null;
+            if (resultados.size() > 0) {
+                
+                return resultados;
+            } else {
+                return null;
             }
         } finally {
             if (rs != null) {
@@ -165,10 +162,10 @@ public class CarreraDAO {
         CarreraDAO dao = new CarreraDAO();
         try {
            //dao.create(c);
-         //   if(dao.read(c)!=null){
-           //     System.out.println(dao.read(c));
-           // }else{
-                //System.out.println("La busqueda no dio resultados");
+           //if(dao.read(c)!=null){
+               //System.out.println(dao.read(c));
+           //}else{
+            //    System.out.println("La busqueda no dio resultados");
             //}
             System.out.println(dao.readAll());
             

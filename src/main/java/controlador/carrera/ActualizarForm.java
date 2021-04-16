@@ -5,24 +5,25 @@
  */
 package controlador.carrera;
 
+import com.mycompany.c15.Carrera;
 import dao.CarreraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.mycompany.c15.Carrera;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
-@WebServlet(name = "MostraCarreras", urlPatterns = {"/MostraCarreras"})
-public class MostraCarreras extends HttpServlet {
+@WebServlet(name = "ActualizarForm", urlPatterns = {"/ActualizarForm"})
+public class ActualizarForm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,63 +42,36 @@ public class MostraCarreras extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Mostrar Carreras</title>");
+            out.println("<title>Servlet ActualizarForm</title>");            
             out.println("</head>");
             out.println("<body>");
-
-            out.println("<h3 align='center'>Listado de Carreras</h3>");                                                
-
-            
-            out.println("<table align='center' border='1'> ");
-            out.println("<tr>");
-            out.println("<th>ID carrera </th>");
-            out.println("<th>Nombre carrera</th>");
-            out.println("<th>Duracion de Carrera</th>");
-            out.println("<th>Acciones</th>");
-            out.println("<\tr>");
-
-  
+            String msj = "";
+            Carrera c = new Carrera();
+            c.setIdCarrera(Integer.parseInt(request.getParameter("id")));
             CarreraDAO dao = new CarreraDAO();
-
             try {
-                List lista = dao.readAll();
-                for (int i = 0; i < lista.size(); i++) {
-                    Carrera c = (Carrera) (lista.get(i));
-                    out.println("<tr>");
-                    out.println("<td>");
-                    out.println("<a href='verCarrera?id="+
-                             c.getIdCarrera()
-                            +"'>" + c.getIdCarrera()+ "</a>");
-                   out.println("</td>");
-                    out.println("<td>");
-                    out.println(c.getNombreCarrera());
-                    out.println("</td>");
-                    out.println("<td>");
-                    out.println(c.getDuracion());
-                    out.println("</td>");
-                    out.println("<td>");
-                    out.println("<a href='verCarrera?id="+
-                             c.getIdCarrera()
-                            +"'>" + c.getIdCarrera()+ "</a>");
-                    
-                    out.println("<td>");
-                     out.println("<a href='actualizar.html?id="+c.getIdCarrera()+"'>Actualizar</a>");
-                      out.println("</td>");
-                       out.println("</tr>");
-                }
 
+                c = dao.read(c);
+                System.out.println(dao.read(c));
             } catch (SQLException ex) {
-
-                //Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE,));
+                Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            out.println("</table>");
-            out.println("<div align='center'>");
-            out.println("<a href='nuevaCarrera.html'>Agregar Carrerar </a>");
-            out.println("</div>");
-
+            //  c.setNombreCarrera(nombre);
+//        c.setDuracion(duracion);
+          if(c!=null){  
+            out.println("<form name='frmDatos' method='post' action='ActualizarCarrera?id="+c.getIdCarrera()+"'>");
+            out.println("<label name='txtId'>id Carrera: "+c.getIdCarrera()+"</label><br>");
+            out.println("<label>Nombre Carrera: </label><br>");
+            out.println("<input type='text' id='txtNombre' name='txtNombre' value='"+c.getNombreCarrera()+"'/><br>");
+            out.println("<label>Duracion Carrera: </label><br>");
+            out.println("<input type='text' id='txtDuracion' name='txtDuracion' value='"+c.getDuracion()+"'/><br>");
+            out.println("<input type='submit' value='ActualizarCarrera' name='btnActualizar'/><br>");
+            out.println("</form>");
+            out.println("<a href='MostraCarreras'>Listado de Carreras</a>");
+          }
             out.println("</body>");
             out.println("</html>");
+          
         }
     }
 

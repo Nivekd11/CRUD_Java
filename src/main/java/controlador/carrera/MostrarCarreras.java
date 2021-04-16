@@ -10,6 +10,7 @@ import dao.CarreraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
-@WebServlet(name = "EliminarCarrera", urlPatterns = {"/EliminarCarrera"})
-public class EliminarCarrera extends HttpServlet {
+@WebServlet(name = "MostrarCarreras", urlPatterns = {"/MostrarCarreras"})
+public class MostrarCarreras extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,36 +38,64 @@ public class EliminarCarrera extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Eliminar Carrera</title>");
+            out.println("<title>Mostrar Carreras</title>");
+            out.println("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet'>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'></script>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js'></script>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js'></script>");   
             out.println("</head>");
             out.println("<body>");
-            String msg = "";
-
-            Carrera carrera = new Carrera();
-            carrera.setIdCarrera(Integer.parseInt(request.getParameter("id")));
+            out.println("<div class='container'>");
+            out.println("<div class='card-boder-info mb-3'>");
+            out.println("<div class='card-body'>");
+            out.println("<h5 class='card-title'>Listado de Carreras</h5>");
+            out.println("<table class='table table-striped'>");
+            out.println("<tr>");
+            out.println("<th>ID Carrera</th>");
+            out.println("<th>Nombre Carrera</th>");
+            out.println("<th>Duración Carrera</th>");
+            out.println("<th>Acciones</th>");
+            out.println("</tr>");
+            out.println();
+            out.println();
             CarreraDAO dao = new CarreraDAO();
-
             try {
-                dao.delete(carrera);
-                msg = "El registro se elimino correctamente";
+                List lista = dao.readAll();
+                for (int i = 0; i < lista.size(); i++) {
+                    Carrera c = (Carrera) lista.get(i);
+                    out.println("<tr>");
+                    out.println("<td>");
+                    out.println("<a href='verCarrera?id="+c.getIdCarrera()+"' class='btn btn-success'>"
+                            + c.getIdCarrera()+"</a>");
+                    out.println("</td>");
+                    out.println("<td>");
+                    out.println(c.getNombreCarrera());
+                    out.println("</td>");
+                    out.println("<td>");
+                    out.println(c.getDuracion());
+                    out.println("</td>");
+                    out.println("<td>");
+                    out.println("<a href='ActualizarForm?id="+c.getIdCarrera()+"' class='btn btn-warning'>"+
+                            "Actualizar</a>");
+                    out.println("</td>");
+                    out.println("</tr>");   
+                }
             } catch (SQLException ex) {
-                msg = "El registro no se elimino correctamente";
-                Logger.getLogger(EliminarCarrera.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+            out.println("</table>");
             out.println("<div align='center'>");
-            out.println("<h2>" + msg + "</h2>");
-            out.println("</br>");
-            out.println("<a href='MostrarCarreras'>");
-            out.println("Lista de carreras");
-            out.println("</a>");
+            out.println("<a href='nuevaCarrera.html' class='btn btn-primary'>Agregar Carrera</a>");
             out.println("</div>");
-         
-           
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
         }

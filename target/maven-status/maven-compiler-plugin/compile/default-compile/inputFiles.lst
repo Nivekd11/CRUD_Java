@@ -1,7 +1,13 @@
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\MostraCarreras.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\EliminarCarrera.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\dao\CarreraDAO.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\com\mycompany\c15\Carrera.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\verCarrera.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\ActualizarCarrera.java
-C:\Users\adan\Documents\NetBeansProjects\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\AgregarCarrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\alumno\AlumnoServlet.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\com\mycompany\c15\Carrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\ActualizarCarrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\entidades\Alumno.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\AgregarCarrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\ActualizarForm.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\dao\AlumnoDAO.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\EliminarCarrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\dao\CarreraDAO.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\entidades\Carrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\verCarrera.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\dto\AlumnoDTO.java
+D:\TAREAS\ESCOM\6to SEM\Web Aplication Developer\UNIDAD\Proyecto WEB\ProyectoBase3CM15_V2\src\main\java\controlador\carrera\MostrarCarreras.java

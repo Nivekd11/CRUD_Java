@@ -10,6 +10,7 @@ import dao.CarreraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
 @WebServlet(name = "ActualizarCarrera", urlPatterns = {"/ActualizarCarrera"})
 public class ActualizarCarrera extends HttpServlet {
@@ -37,29 +38,32 @@ public class ActualizarCarrera extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
              out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<h1>Hola</h1>");
-            out.println("<title>Servlet Agregar Carrera </title>");
+            out.println("<title>Actualizar Carrera </title>");
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
 
-            String msj = "";
+             String msj = "";
             Carrera c = new Carrera();
-            c.setIdCarrera(Integer.parseInt(request.getParameter("nombreId")));
+            
+            c.setIdCarrera(Integer.parseInt(request.getParameter("id")));
             c.setNombreCarrera(request.getParameter("txtNombre"));
             c.setDuracion(Integer.parseInt(request.getParameter("txtDuracion")));
             CarreraDAO dao = new CarreraDAO();
+            
+            
             //  c.setNombreCarrera(nombre);
 //        c.setDuracion(duracion);
 
             try {
                 dao.update(c);
-                msj = "La carrera se agrago correctamente";
+                msj = "La carrera se actualizo correctamente";
                 //out.println(dao.readAll());
             } catch (SQLException ex) {
                  msj = "No se puedo agregar correctamente";
@@ -69,7 +73,7 @@ public class ActualizarCarrera extends HttpServlet {
             out.println("<div align='center'>");
             out.println(msj);
             out.println("<br/>");
-            out.println("<a href='MostraCarreras'>Listado de Carreras</a>");
+            out.println("<a  href='MostrarCarreras'>Listado de Carreras</a>");
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");

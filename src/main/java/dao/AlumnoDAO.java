@@ -8,6 +8,7 @@ package dao;
 import com.mycompany.c15.Carrera;
 import dto.AlumnoDTO;
 import entidades.Alumno;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,29 +21,25 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
 public class AlumnoDAO {
 
-    private static final String SQL_INSERT = "INSERT INTO Alumno (nombre,paterno,materno,email,noBoleta,idCarrera) values(?,?,?,?,?,?) idAlumno=?";
-
-    private static final String SQL_UPDATE = "UPDATE Alumno set nombre=?,paterno=?,materno=?,email=?,noBoleta=?,idCarrera=? where idAlumno=?";
-
-    private static final String SQL_DELETE = "DELETE FROM Alumno where idAlumno=?";
-
-    private static final String SQL_READ = "SELECT idAlumno,nombre,paterno,materno,email,noBoleta,idCarrera FROM Alumno where idAlumno=?";
-
-    private static final String SQL_READALL = "SELECT idAlumno,nombre,paterno,materno,email,noBoleta,idCarrera FROM Alumno";
+    private static final String SQL_INSERT = "{call spCreate(?,?,?,?,?,?)}";
+    private static final String SQL_UPDATE = "{call spUpdate(?,?,?,?,?,?,?)}";
+    private static final String SQL_DELETE = "{call spDelete(?)}";
+    private static final String SQL_READ = "{call spRead(?)}";
+    private static final String SQL_READ_ALL = "call spReadAll()";
 
     private Connection conexion;
 
     private void obtenerConexion() {
           String usuario = "root";
-        String clave = "n0m3l0";
+        String clave = "nivek";
         //Checar puerto por si hay error
          //String url="jdbc:mysql://localhost:3306/usuario";
-        String url = "jdbc:mysql://localhost:3306/usuario?serverTimezone=America/Mexico_City&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;useSSL=false";
-        String driverMysql = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/proyectobase3cm15?serverTimezone=America/Mexico_City&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;useSSL=false";
+        String driverMysql = "com.mysql.cj.jdbc.Driver";
         try {
             // String driverMysql="com.mysql.cj.jdbc.Driver";
             Class.forName(driverMysql);
@@ -56,119 +53,115 @@ public class AlumnoDAO {
         }
          }
 
-    public void create(AlumnoDTO dto) throws SQLException {
+    public void create(AlumnoDTO dto)throws SQLException{
         obtenerConexion();
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement(SQL_INSERT);
-            ps.setString(1, dto.getEntidad().getNombre());
-            ps.setString(2, dto.getEntidad().getPaterno());
-            ps.setString(3, dto.getEntidad().getMaterno());
-            ps.setString(4, dto.getEntidad().getEmail());
-            ps.setString(5, dto.getEntidad().getNoBoleta());
-            ps.setInt(6, dto.getEntidad().getIdCarrera());
-            ps.executeUpdate();
-        } finally {
-            if (ps != null) {
-                ps.close();
+        CallableStatement cs = null;
+        try{
+            cs = conexion.prepareCall(SQL_INSERT);
+            cs.setString(1, dto.getEntidad().getNombre());
+            cs.setString(2, dto.getEntidad().getPaterno());
+            cs.setString(3, dto.getEntidad().getMaterno());
+            cs.setString(4, dto.getEntidad().getEmail());
+            cs.setString(5, dto.getEntidad().getNoBoleta());
+            cs.setInt(6, dto.getEntidad().getIdCarrera());
+            cs.executeUpdate();
+        }finally{
+            if (cs != null) {
+                cs.close();
             }
             if (conexion != null) {
                 conexion.close();
             }
         }
-
     }
 
-    public void update(AlumnoDTO dto) throws SQLException {
+    public void update(AlumnoDTO dto)throws SQLException{
         obtenerConexion();
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement(SQL_UPDATE);
-            ps.setString(1, dto.getEntidad().getNombre());
-            ps.setString(2, dto.getEntidad().getPaterno());
-            ps.setString(3, dto.getEntidad().getMaterno());
-            ps.setString(4, dto.getEntidad().getEmail());
-            ps.setString(5, dto.getEntidad().getNoBoleta());
-            ps.setInt(6, dto.getEntidad().getIdCarrera());
-            ps.setInt(7, dto.getEntidad().getIdAlumno());
-            ps.executeUpdate();
-        } finally {
-            if (ps != null) {
-                ps.close();
+        CallableStatement cs = null;
+        try{
+            cs = conexion.prepareCall(SQL_UPDATE);
+            cs.setString(1, dto.getEntidad().getNombre());
+            cs.setString(2, dto.getEntidad().getPaterno());
+            cs.setString(3, dto.getEntidad().getMaterno());
+            cs.setString(4, dto.getEntidad().getEmail());
+            cs.setString(5, dto.getEntidad().getNoBoleta());
+            cs.setInt(6, dto.getEntidad().getIdCarrera());
+            cs.setInt(7, dto.getEntidad().getIdAlumno());
+            cs.executeUpdate();
+        }finally{
+            if (cs != null) {
+                cs.close();
             }
             if (conexion != null) {
                 conexion.close();
             }
         }
-
     }
 
-    public void delete(AlumnoDTO dto) throws SQLException {
+    public void delete(AlumnoDTO dto)throws SQLException{
         obtenerConexion();
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement(SQL_DELETE);
-            ps.setInt(1, dto.getEntidad().getIdAlumno());
-            ps.executeUpdate();
-        } finally {
-            if (ps != null) {
-                ps.close();
+        CallableStatement cs = null;
+        try{
+            cs = conexion.prepareCall(SQL_DELETE);
+            cs.setInt(1, dto.getEntidad().getIdAlumno());
+            cs.executeUpdate();
+        }finally{
+            if (cs != null) {
+                cs.close();
             }
             if (conexion != null) {
                 conexion.close();
             }
         }
-
     }
     //METODOS READ Y READALL 
     
-     public List readAll() throws SQLException {
+    public AlumnoDTO read(AlumnoDTO dto) throws SQLException {
         obtenerConexion();
-        PreparedStatement ps = null;
+        CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            ps=conexion.prepareStatement(SQL_READALL);
-            rs=ps.executeQuery();
+            cs = conexion.prepareCall(SQL_READ);
+            cs.setInt(1, dto.getEntidad().getIdAlumno());
+            rs = cs.executeQuery();
             List resultados = obtenerResultados(rs);
-            if(resultados.size()>0){
-            return resultados;
-            }else {
-            return null;
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conexion != null) {
-                conexion.close();
-            }
-        }
-
-    }
-    
-     public Carrera read(AlumnoDTO dto) throws SQLException {
-        obtenerConexion();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            ps = conexion.prepareStatement(SQL_READ);
-            ps.setInt(1, dto.getEntidad().getIdAlumno());
-            rs = ps.executeQuery();
-            List resultados = obtenerResultados(rs);
-            if (resultados.size() > 0) {
-                return (Carrera) resultados.get(0);
-            } else {
+            if(resultados.size() > 0){
+                return (AlumnoDTO) resultados.get(0);
+            }else{
                 return null;
             }
         } finally {
             if (rs != null) {
                 rs.close();
             }
-            if (ps != null) {
-                ps.close();
+            if (cs != null) {
+                cs.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        }
+    }
+    
+      public List readAll() throws SQLException {
+        obtenerConexion();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conexion.prepareCall(SQL_READ_ALL);
+            rs = cs.executeQuery();
+            List resultados = obtenerResultados(rs);
+            if(resultados.size() > 0){
+                return resultados;
+            }else{
+                return null;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (cs != null) {
+                cs.close();
             }
             if (conexion != null) {
                 conexion.close();

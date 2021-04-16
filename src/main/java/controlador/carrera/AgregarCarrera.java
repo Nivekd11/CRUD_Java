@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
 @WebServlet(name = "AgregarCarrera", urlPatterns = {"/AgregarCarrera"})
 public class AgregarCarrera extends HttpServlet {
@@ -43,7 +43,7 @@ public class AgregarCarrera extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Agregar Carrera </title>");
+            out.println("<title>Agregar Carrera </title>");
             out.println("</head>");
             out.println("<body>");
 
@@ -68,7 +68,7 @@ public class AgregarCarrera extends HttpServlet {
             out.println("<div align='center'>");
             out.println(msj);
             out.println("<br/>");
-            out.println("<a href='MostraCarreras'>Listado de Carreras</a>");
+            out.println("<a href='MostrarCarreras'>Listado de Carreras</a>");
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");

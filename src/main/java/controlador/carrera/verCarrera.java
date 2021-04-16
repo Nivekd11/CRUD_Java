@@ -74,7 +74,7 @@ public class verCarrera extends HttpServlet {
                 out.println("<div align='center'>");
                 out.println("<a href='EliminarCarrera?id=" + c.getIdCarrera() + "'>Eliminar carrera</a>");
                 out.println("<br/>");
-                out.println("<a href='MostraCarreras'>Mostar Carreras</a>");
+                out.println("<a href='MostrarCarreras'>Mostar Carreras</a>");
                 out.println("</div>");
 
             }

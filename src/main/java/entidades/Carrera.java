@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author adan
+ * @author nivek
  */
 public class Carrera implements Serializable {
     private int idCarrera; 

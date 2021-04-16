@@ -1,7 +1,12 @@
+controlador\carrera\MostrarCarreras.class
 controlador\carrera\AgregarCarrera.class
-com\mycompany\c15\Carrera.class
-controlador\carrera\MostraCarreras.class
-controlador\carrera\verCarrera.class
+entidades\Alumno.class
 controlador\carrera\ActualizarCarrera.class
-dao\CarreraDAO.class
+dto\AlumnoDTO.class
 controlador\carrera\EliminarCarrera.class
+dao\AlumnoDAO.class
+com\mycompany\c15\Carrera.class
+controlador\carrera\alumno\AlumnoServlet.class
+controlador\carrera\verCarrera.class
+dao\CarreraDAO.class
+entidades\Carrera.class
