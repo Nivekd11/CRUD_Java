@@ -5,7 +5,7 @@
  */
 package dao;
 
-import com.mycompany.c15.Carrera;
+import entidades.Carrera;
 import dto.AlumnoDTO;
 import entidades.Alumno;
 import java.sql.CallableStatement;
@@ -38,7 +38,7 @@ public class AlumnoDAO {
         String clave = "nivek";
         //Checar puerto por si hay error
          //String url="jdbc:mysql://localhost:3306/usuario";
-        String url = "jdbc:mysql://localhost:3306/proyectobase3cm15?serverTimezone=America/Mexico_City&amp;allowPublicKeyRetrieval=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/proyectobase3cm15?zeroDateTimeBehavior=CONVERT_TO_NULL";
         String driverMysql = "com.mysql.cj.jdbc.Driver";
         try {
             // String driverMysql="com.mysql.cj.jdbc.Driver";
@@ -62,7 +62,7 @@ public class AlumnoDAO {
             cs.setString(2, dto.getEntidad().getPaterno());
             cs.setString(3, dto.getEntidad().getMaterno());
             cs.setString(4, dto.getEntidad().getEmail());
-            cs.setString(5, dto.getEntidad().getNoBoleta());
+            cs.setString(5, dto.getEntidad().getTelefono());
             cs.setInt(6, dto.getEntidad().getIdCarrera());
             cs.executeUpdate();
         }finally{
@@ -84,7 +84,7 @@ public class AlumnoDAO {
             cs.setString(2, dto.getEntidad().getPaterno());
             cs.setString(3, dto.getEntidad().getMaterno());
             cs.setString(4, dto.getEntidad().getEmail());
-            cs.setString(5, dto.getEntidad().getNoBoleta());
+            cs.setString(5, dto.getEntidad().getTelefono());
             cs.setInt(6, dto.getEntidad().getIdCarrera());
             cs.setInt(7, dto.getEntidad().getIdAlumno());
             cs.executeUpdate();
@@ -169,24 +169,46 @@ public class AlumnoDAO {
         }
     }
      
-      private List obtenerResultados(ResultSet rs) throws SQLException{
-        List resultados= new ArrayList();
-        PreparedStatement ps = null;
-        while (rs.next()) {            
-            ps = conexion.prepareStatement(SQL_READ);
-            AlumnoDTO dt = new AlumnoDTO();
-            ps.setString(1,dt.getEntidad().getNombre());
-            ps.setString(2, dt.getEntidad().getPaterno());
-            ps.setString(3, dt.getEntidad().getMaterno());
-            ps.setString(4, dt.getEntidad().getEmail());
-            ps.setString(5, dt.getEntidad().getNoBoleta());
-            
-            resultados.add(dt);
-
+       private List obtenerResultados(ResultSet rs) throws SQLException{
+        List resultados = new ArrayList();
+        while(rs.next()){
+            AlumnoDTO dto = new AlumnoDTO();
+            dto.getEntidad().setIdAlumno(rs.getInt("idAlumno"));
+            dto.getEntidad().setNombre(rs.getString("nombre"));
+            dto.getEntidad().setPaterno(rs.getString("paterno"));
+            dto.getEntidad().setMaterno(rs.getString("materno"));
+            dto.getEntidad().setEmail(rs.getString("email"));
+            dto.getEntidad().setTelefono(rs.getString("telefono"));
+            dto.getEntidad().setIdCarrera(rs.getInt("idCarrera"));
+            resultados.add(dto);
+        }
+        return resultados;
+    }
+      
+      public static void main(String[] args) {
+        AlumnoDTO dto = new AlumnoDTO();
+        
+        dto.getEntidad().setNombre("Goku");
+        dto.getEntidad().setPaterno("De la Garza");
+        dto.getEntidad().setMaterno("Guzman");
+        dto.getEntidad().setEmail("goku@gmail.com");
+        dto.getEntidad().setTelefono("5511234567");
+        dto.getEntidad().setIdCarrera(1);
+        dto.getEntidad().setIdAlumno(1);
+        
+        //dto.getEntidad().setIdAlumno(1);
+        AlumnoDAO dao = new AlumnoDAO();
+        try {
+            dao.delete(dto);
+          //dao.create(dto);
+          //dao.update(dto);
+            //System.out.println(dao.readAll());
+           //System.out.println(dao.read(dto));
+        } catch (SQLException ex) {
+            Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return resultados;
-      }
+    }
     
 
 }

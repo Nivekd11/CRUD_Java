@@ -5,7 +5,7 @@
  */
 package controlador.carrera;
 
-import com.mycompany.c15.Carrera;
+import entidades.Carrera;
 import dao.CarreraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,10 +51,39 @@ public class MostrarCarreras extends HttpServlet {
             out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js'></script>");   
             out.println("</head>");
             out.println("<body>");
+            out.println("<nav class=\"navbar navbar-expand-lg navbar-light bg-light nav-bg\">");
+            out.println("<div class=\"container-fluid\">");
+            out.println("<a class=\"navbar-brand\" href=\"index.html\">Gestion de Programas Educativos</a>");
+            out.println("<button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">");
+            out.println("<span class=\"navbar-toggler-icon\"></span>");
+            out.println("</button>");
+            out.println("<div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">");
+            out.println("<ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">");
+            out.println("<li class=\"nav-item\">");
+            out.println("  <a class=\"nav-link active\" aria-current=\"page\" href=\"nuevoAlumno.html\">Nuevo Alumno</a>");
+            out.println("</li>");
+            out.println("<li class=\"nav-item\">");
+            out.println("<a class=\"nav-link\" href=\"nuevaCarrera.html\">Agregar Carrera</a>");
+            out.println("</li>");
+            out.println(" <li class=\"nav-item\">");
+            out.println(" <a class=\"nav-link\" href=\"MostrarCarreras\">Mostrar Carreras</a>");
+            out.println("</li>");
+            out.println("<li class=\"nav-item\">");
+            out.println("<a class=\"nav-link\" href=\"AlumnoServlet?opcion=listaDeAlumnos\">Mostrar Alumnos</a>");
+            out.println(" </li>");
+            out.println("</ul>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("</nav>");
+            
+            
+            
+            
+            
             out.println("<div class='container'>");
             out.println("<div class='card-boder-info mb-3'>");
             out.println("<div class='card-body'>");
-            out.println("<h5 class='card-title'>Listado de Carreras</h5>");
+            out.println("<h1 class=\"display-4\" align=\"center\">Listado De Carreras</h1>");
             out.println("<table class='table table-striped'>");
             out.println("<tr>");
             out.println("<th>ID Carrera</th>");
@@ -81,7 +110,7 @@ public class MostrarCarreras extends HttpServlet {
                     out.println(c.getDuracion());
                     out.println("</td>");
                     out.println("<td>");
-                    out.println("<a href='ActualizarForm?id="+c.getIdCarrera()+"' class='btn btn-warning'>"+
+                    out.println("<a href='ActualizarForm?id="+c.getIdCarrera()+"' class=\"btn btn-info\">"+
                             "Actualizar</a>");
                     out.println("</td>");
                     out.println("</tr>");   

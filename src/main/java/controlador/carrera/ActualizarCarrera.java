@@ -5,7 +5,7 @@
  */
 package controlador.carrera;
 
-import com.mycompany.c15.Carrera;
+import entidades.Carrera;
 import dao.CarreraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,6 +45,10 @@ public class ActualizarCarrera extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Actualizar Carrera </title>");
+            out.println("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet'>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'></script>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js'></script>");
+            out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js'></script>");
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
@@ -71,9 +75,11 @@ public class ActualizarCarrera extends HttpServlet {
             }
 
             out.println("<div align='center'>");
-            out.println(msj);
+            out.println("<div class='card text-white bg-info mb-3' style='max-width: 40rem;'>");
+            out.println("<h5 class='card-title'>"+msj+"</h5>");
+            out.println("</div>");
             out.println("<br/>");
-            out.println("<a  href='MostrarCarreras'>Listado de Carreras</a>");
+            out.println("<a class='btn btn-primary' href='MostrarCarreras'>Listado de Carreras</a>");
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");

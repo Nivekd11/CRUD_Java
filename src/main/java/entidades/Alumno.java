@@ -42,13 +42,14 @@ public class Alumno implements Serializable {
         this.email = email;
     }
 
-    public void setNoBoleta(String noBoleta) {
-        this.noBoleta = noBoleta;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
     }
+    
 
     public String getPaterno() {
         return paterno;
@@ -62,8 +63,8 @@ public class Alumno implements Serializable {
         return email;
     }
 
-    public String getNoBoleta() {
-        return noBoleta;
+    public String getTelefono() {
+        return telefono;
     }
 
     public int getIdCarrera() {
@@ -74,7 +75,7 @@ public class Alumno implements Serializable {
  private String paterno;
  private String materno ;
  private String email ;
- private String noBoleta;
+ private String telefono;
  private int idCarrera;
     
 }

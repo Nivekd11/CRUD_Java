@@ -3,10 +3,11 @@ controlador\carrera\AgregarCarrera.class
 entidades\Alumno.class
 controlador\carrera\ActualizarCarrera.class
 dto\AlumnoDTO.class
+controlador\carrera\ActualizarForm.class
 controlador\carrera\EliminarCarrera.class
 dao\AlumnoDAO.class
-com\mycompany\c15\Carrera.class
-controlador\carrera\alumno\AlumnoServlet.class
+controlador\alumno\AgregarAlumno.class
 controlador\carrera\verCarrera.class
 dao\CarreraDAO.class
 entidades\Carrera.class
+controlador\alumno\AlumnoServlet.class

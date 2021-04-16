@@ -1,6 +1,6 @@
 package dao;
 
-import com.mycompany.c15.Carrera;
+import entidades.Carrera;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

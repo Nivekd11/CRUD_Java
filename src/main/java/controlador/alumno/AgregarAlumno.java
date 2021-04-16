@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador.carrera;
+package controlador.alumno;
 
-import entidades.Carrera;
-import dao.CarreraDAO;
+import dao.AlumnoDAO;
+import dto.AlumnoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author nivek
+ * @author GRINCHS
  */
-@WebServlet(name = "ActualizarForm", urlPatterns = {"/ActualizarForm"})
-public class ActualizarForm extends HttpServlet {
+@WebServlet(name = "AgregarAlumno", urlPatterns = {"/AgregarAlumno"})
+public class AgregarAlumno extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,66 +37,52 @@ public class ActualizarForm extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+       request.setCharacterEncoding("UTF-8");
+        try (PrintWriter out = response.getWriter()){
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Actualizar Alumno</title>");  
+            out.println("<title>Actualizar Alumno</title>");            
             out.println("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet'>");
             out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js'></script>");
             out.println("<script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js'></script>");
             out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js'></script>");
             out.println("</head>");
             out.println("<body>");
-            String msj = "";
-            Carrera c = new Carrera();
-            c.setIdCarrera(Integer.parseInt(request.getParameter("id")));
-            CarreraDAO dao = new CarreraDAO();
+            
+            String msg = "";
+            AlumnoDTO dto = new AlumnoDTO();
+            dto.getEntidad().setNombre(request.getParameter("txtNombre"));
+            dto.getEntidad().setPaterno(request.getParameter("txtPaterno"));
+            dto.getEntidad().setMaterno(request.getParameter("txtMaterno"));
+            dto.getEntidad().setEmail(request.getParameter("txtEmail"));
+            dto.getEntidad().setTelefono(request.getParameter("txtTelefono"));
+            dto.getEntidad().setIdCarrera(Integer.parseInt(request.getParameter("idCarrera")));
+            System.out.println(request.getParameter("txtNombre"));
+            AlumnoDAO dao = new AlumnoDAO();
             try {
-
-                c = dao.read(c);
-                System.out.println(dao.read(c));
+                dao.create(dto);
+ 
+                msg = "El alumno fue agregado exitosamente";
             } catch (SQLException ex) {
-                Logger.getLogger(CarreraDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AlumnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                msg = "Hubo un error al agregar el alumno";
             }
-            //  c.setNombreCarrera(nombre);
-//        c.setDuracion(duracion);
-          if(c!=null){  
-            out.println("<h1 class=\"display-4\" align=\"center\">Actualizar Carrera</h1>");
-            out.println("<div align='center' >");
-            out.println("<div  class=\"card border-primary mb-3\" style=\"max-width: 40rem;\">");
-            out.println("<form name='frmDatos' method='post' action='ActualizarCarrera?id="+c.getIdCarrera()+"'>");
-            out.println("<div class=\"mb-3\">");
-            out.println("<label name='txtId'>id Carrera: "+c.getIdCarrera()+"</label><br>");
+            out.println("<div align='center'>");
+            out.println("<div class=\"card text-white bg-success mb-3\" style=\"max-width: 40rem;\">");
+            out.println("<h5 class='card-title'>"+msg+"</h5>");
             out.println("</div>");
-            out.println("<div class=\"mb-3\">");
-            out.println("<label>Nombre Carrera: </label><br>");
-            out.println("<div class=\"col-sm-15\">");
-            out.println("<input type='text' id='txtNombre' name='txtNombre' value='"+c.getNombreCarrera()+"'/><br>");
-            out.println("</div>");
-            out.println("</div>");
-            out.println("<div class=\"mb-3\">");
-            out.println("<label>Duracion Carrera: </label><br>");
-            out.println("<div class=\"col-sm-15\">");
-            out.println("<input type='text' id='txtDuracion' name='txtDuracion' value='"+c.getDuracion()+"'/><br>");
-            out.println("</div>");
-            out.println("</div>");
-            out.println("<div class=\"col-sm-10\">");
-            out.println("<input type='submit' class=\"btn btn-outline-primary\" value='ActualizarCarrera' name='btnActualizar'/><br>");
-            out.println("</div>");
-            out.println("</form>");
-        
-            out.println("<div class=\"d-grid gap-2 col-6 mx-auto\">");
-            out.println("<a class=\"btn btn-success\" href='MostraCarreras'>Listado de Carreras</a>");
-            out.println("</div>");
-            out.println("</div>");
+            out.println("<br/>");
+            out.println("<a href='AlumnoServlet?opcion=listaDeAlumnos' class='btn btn-primary'>Lista de Alumnos<a/>");
             out.println("</div>");
             
-          }
             out.println("</body>");
             out.println("</html>");
-          
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AlumnoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -138,5 +124,10 @@ public class ActualizarForm extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    
+    
+     
 }
+
+

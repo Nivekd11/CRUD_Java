@@ -9,35 +9,49 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-bg">
   <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Barra de navegacion</a>
+      <a class="navbar-brand" href="index.html">Gestion de Programas Educativos</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="nuevaCarrera.html">Nueva Carrera</a>
+            <a class="nav-link active" aria-current="page" href="nuevoAlumno.html">Nuevo Alumno</a>
         </li>
         <li class="nav-item">
       
-          <a class="nav-link" href="AgregarCarrera">Agregar Carrera</a>
+          <a class="nav-link" href="nuevaCarrera.html">Agregar Carrera</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="MostrarCarreras">Mostrar Carreras</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="AlumnoServlet?opcion=listaDeAlumnos">Mostrar Alumnos</a>
+        </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
     </div>
   </div>
 </nav>
+ <br/>   
+ <br/>
+<div align="center"> 
+ <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Descripcion Práctica 1</div>
+  <div class="card-body">
+    <h5 class="card-title">Gestion de Programas Educativos</h5>
+    <p class="card-text">Practica donde se a realizado el CRUD , de la base de datos de Carrera y Alumno.</p>
+  </div>
+  </div>
+        
+        
+        
        
     </body>
 </html>
